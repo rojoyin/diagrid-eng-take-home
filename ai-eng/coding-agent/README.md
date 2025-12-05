@@ -3,39 +3,46 @@
 Your task is to make a coding agent using the starter provided in this repository.
 The expectation is to use 2-4 hours. It should not be necessary to spend >4 hours.
 
+## Resource
+- [Dapr Agents docs](https://v1-16.docs.dapr.io/developing-applications/dapr-agents/)
+- [Dapr Python SDK docs](https://docs.dapr.io/developing-applications/sdks/python)
+
 ## Pre-requisites
 
-This starter assumes a running [ollama](https://ollama.com/download) with [llama3.2:latest](https://ollama.com/library/llama3.2:latest). This allows you to conduct the assignment without relying on external models.  
-Feel free to change this to your liking.
-  
-You'll also need [the Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/) installed.
+This starter assumes you are running the following:
+- [Ollama](https://ollama.com/download) on port 11434 with [llama3.2:latest](https://ollama.com/library/llama3.2:latest).
+- [Redis](https://redis.io/docs/getting-started/installation/) on port 6379 with no authentication.
+
+You can modify the components directly in the `./components` directory if you need to change these configuration.
+
+You will also need to install:
+- [Dapr CLI](https://docs.dapr.io/getting-started/install-dapr-cli/)
+- [Python](https://www.python.org/downloads/)
 
 ## Task 1
 
-Get the agent running and decide on the way to run the agent.
-Feel free to change the `./components` files to your liking.
+The first task is to edit the `main.py` and choose how the agent should run; `serve`, `run`, `subscribe` and then execute the program.
 
 ### Deliverable
-Be able to articulate _why_ this method was chosen for this specific type of agent.
+Show a running agent and articulate _why_ you chose this method for the agent to run for this particular use case.
 
 ## Task 2
 
-Implement tools relevant for a coding agent. Suggestions for tools
-1. Filesystem  
-2. Pattern matching
-3. File modification  
-4. Git operations
-5. Os commands
+Implement `tools` relevant for an agent to assist a developer with coding tasks.
+
+Suggestions for tools:
+1. Filesystem operations
+2. String manipulation
+3. Git operations
+4. OS operations
 
 ### Deliverable
-Walk through and explain in detail the implemented  tool.  
-Explain why this tool is relevant for a coding agent.  
-Explain in detail how to code works and achieve the desired outcome.
+Explain the details of the implementations and explain why the tool is relevant for a coding agent.
 
 ## Task 3
 
-Understand the code execution of the agent. What goes on under the hood in Dapr Agents (and the dependencies).
+Demonstrate your understanding of the Dapr Agents framework, dependencies and the code execution of the agent.
 
 ### Deliverable
-Demo the agent.  
-Explain what happens during the execution flow of the agent.  
+Demonstrate the agent using the implemented tool(s) to help you with a coding task.
+Explain what is happening during the execution flow of the agent and how it is interacting with Dapr and it's components.

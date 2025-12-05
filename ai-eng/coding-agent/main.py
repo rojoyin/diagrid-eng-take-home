@@ -52,25 +52,30 @@ def main() -> None:
     try:
         ######
         #
-        # You can decide whether .serve(), .run() or .subscribe() is most fitting for the task
+        # Choose how to run the agent by uncommenting one of the options below (1, 2 or 3).
         #
         ######
-        
-        # .run()
-        prompt = "Your prompt here"
-        result = await runner.run(
-            travel_planner,
-            payload={"task": prompt},
-        )
-        print(f"\nFinal Result:\n{result}\n", flush=True)
-        
-        # .serve()
-        runner.serve(agent, port=8001)
 
-        # .subscribe()
-        from dapr_agents.workflow.utils.core import wait_for_shutdown
-        runner.subscribe(agent)
-        await wait_for_shutdown()
+        # 1. .run()
+        # -----------------------------
+        # prompt = "Your prompt here"
+        # result = await runner.run(
+        #     agent,
+        #     payload={"task": prompt},
+        # )
+        # print(f"\nFinal Result:\n{result}\n", flush=True)
+
+        # 2. .serve()
+        # -----------------------------
+        # runner.serve(agent, port=8001)
+
+        # 3. .subscribe()
+        # -----------------------------
+        # from dapr_agents.workflow.utils.core import wait_for_shutdown
+        # runner.subscribe(agent)
+        # await wait_for_shutdown()
+
+        print("Done ✅", flush=True)
     finally:
         runner.shutdown()
         agent.stop()
