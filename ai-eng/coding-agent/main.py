@@ -46,7 +46,6 @@ def main() -> None:
             )
         ),
     )
-    agent.start()
 
     runner = AgentRunner()
     try:
