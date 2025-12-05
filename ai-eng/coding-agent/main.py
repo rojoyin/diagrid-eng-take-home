@@ -76,8 +76,7 @@ def main() -> None:
 
         print("Done ✅", flush=True)
     finally:
-        runner.shutdown()
-        agent.stop()
+        runner.shutdown(agent)
 
 
 if __name__ == "__main__":
