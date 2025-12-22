@@ -26,6 +26,33 @@ The first task is to edit the `main.py` and choose how the agent should run; `se
 ### Deliverable
 Show a running agent and articulate _why_ you chose this method for the agent to run for this particular use case.
 
+The method I chose is `serve` because it allows the agent to run as a web server and handle requests from the user.
+The agent will run on port 8001 and will be accessible at `http://localhost:8001`. 
+
+The way I see the flow of use is like this:
+- The client is a plugin inside the user's IDE that allows the user to send messages via a text box.
+- Once the client submits the task, the post request is sent creating a task instance.
+- The UI shows a loading spinner and block sending further messages until the task is solved or expires.
+
+The command to run this in local, with an environment variable to increase the timeout for the API as in local the llama
+model was taking longer than a minute to execute.
+
+```bash
+DAPR_API_TIMEOUT_SECONDS=300 dapr run --app-id coding-agent --resources-path ./components --app-port 8001 -- uv run python main.py
+```
+
+You can access the API docs at `http://localhost:8001/docs`, where the POST endpoint `/run` is available to create 
+a task instance, and the suggested body is:
+
+```json
+{"task": "Your task here"}
+```
+Create a task instance and you will receive a task id.
+![img.png](img.png)
+
+Check the task status and output.
+![img_1.png](img_1.png)
+
 ## Task 2
 
 Implement `tools` relevant for an agent to assist a developer with coding tasks.

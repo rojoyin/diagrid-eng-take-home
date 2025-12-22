@@ -66,7 +66,7 @@ def main() -> None:
 
         # 2. .serve()
         # -----------------------------
-        # runner.serve(agent, port=8001)
+        runner.serve(agent, port=8001)
 
         # 3. .subscribe()
         # -----------------------------
