@@ -66,6 +66,18 @@ Suggestions for tools:
 ### Deliverable
 Explain the details of the implementations and explain why the tool is relevant for a coding agent.
 
+To implement this, there are two main goals:
+- Reduce the amount of code required when we need to add a new tool
+- Keep each tool self-contained and easy to understand, disallowing the changing the code that is already written and is functional.
+
+So to achieve these, I created a `tools` regular package whose `__init__.py` file imports all the tools from the `tools` directory,
+each tool is a function that is decorated with the `@tool` decorator from the `dapr_agents` library, and then added to the agent.
+
+It is assumed that the entry point of each tool is the function that is decorated with the `@tool` decorator and its 
+name is the same as the module's name, this way the import in the `main.py` is simple and does not require any additional
+configuration. Also, if some extra functions are needed to implement the actual functionality of the tool, they are 
+contained in the same module as the tool.
+
 ## Task 3
 
 Demonstrate your understanding of the Dapr Agents framework, dependencies and the code execution of the agent.

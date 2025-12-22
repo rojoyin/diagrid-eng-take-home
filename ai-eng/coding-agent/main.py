@@ -14,6 +14,8 @@ from dapr_agents.agents.configs import (
 from dapr_agents.storage.daprstores.stateservice import StateStoreService
 from dapr_agents.workflow.runners import AgentRunner
 
+from tools import read_file
+
 
 def main() -> None:
     logging.basicConfig(level=logging.INFO)
@@ -45,6 +47,7 @@ def main() -> None:
                 session_id="agent-session",
             )
         ),
+        tools=[read_file],
     )
 
     runner = AgentRunner()
