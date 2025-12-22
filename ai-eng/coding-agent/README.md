@@ -66,17 +66,29 @@ Suggestions for tools:
 ### Deliverable
 Explain the details of the implementations and explain why the tool is relevant for a coding agent.
 
+#### Architecture
+
 To implement this, there are two main goals:
 - Reduce the amount of code required when we need to add a new tool
-- Keep each tool self-contained and easy to understand, disallowing the changing the code that is already written and is functional.
+- Keep each tool self-contained and easy to understand, disallowing changing code that is already written and functional
 
-So to achieve these, I created a `tools` regular package whose `__init__.py` file imports all the tools from the `tools` directory,
-each tool is a function that is decorated with the `@tool` decorator from the `dapr_agents` library, and then added to the agent.
+I created a [tools](./tools) regular package whose [__init__.py](./tools/__init__.py) auto-discovers all tool modules 
+and populates the `ALL_TOOLS` list, which is then imported in [main.py](./main.py).
 
-It is assumed that the entry point of each tool is the function that is decorated with the `@tool` decorator and its 
-name is the same as the module's name, this way the import in the `main.py` is simple and does not require any additional
-configuration. Also, if some extra functions are needed to implement the actual functionality of the tool, they are 
-contained in the same module as the tool.
+It is assumed that the entry point of each tool is a function decorated with `@tool` and its name matches the module name. 
+This way [main.py](./main.py) doesn't need to change when adding new tools, as the array is automatically populated.
+
+To add a new tool, simply create a new script in the [tools/](./tools) directory with the tool function matching the filename.
+
+#### Implemented Tools
+| Tool | Category | Why it's relevant |
+|------|----------|-------------------|
+| [read_file](./tools/read_file.py) | Filesystem | Allows the agent to read and understand existing code |
+| [write_file](./tools/write_file.py) | Filesystem | Enables the agent to create or modify code files |
+| [list_directory](./tools/list_directory.py) | Filesystem | Lets the agent navigate and explore the project structure |
+| [run_command](./tools/run_command.py) | OS | Executes shell commands for tests, builds, and installations |
+| [git_commit](./tools/git_commit.py) | Git | Stages and commits changes with a message |
+Each tool returns informative error messages so the LLM can handle failures gracefully and retry or adjust its approach.
 
 ## Task 3
 
