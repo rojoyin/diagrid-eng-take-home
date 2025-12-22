@@ -14,7 +14,7 @@ from dapr_agents.agents.configs import (
 from dapr_agents.storage.daprstores.stateservice import StateStoreService
 from dapr_agents.workflow.runners import AgentRunner
 
-from tools import read_file, write_file, list_directory, run_command, git_commit
+from tools import ALL_TOOLS
 
 
 def main() -> None:
@@ -47,7 +47,7 @@ def main() -> None:
                 session_id="agent-session",
             )
         ),
-        tools=[read_file, write_file, list_directory, run_command, git_commit],
+        tools=ALL_TOOLS,
     )
 
     runner = AgentRunner()
