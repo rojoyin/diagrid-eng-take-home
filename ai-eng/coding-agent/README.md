@@ -97,3 +97,15 @@ Demonstrate your understanding of the Dapr Agents framework, dependencies and th
 ### Deliverable
 Demonstrate the agent using the implemented tool(s) to help you with a coding task.
 Explain what is happening during the execution flow of the agent and how it is interacting with Dapr and it's components.
+
+### Execution Flow
+
+When a task is submitted to the agent, the following sequence occurs:
+
+1. HTTP Request — User sends a POST request to the `/run` endpoint with the task payload
+2. Workflow Creation — AgentRunner.serve() creates a Dapr workflow instance with a unique ID
+3. LLM Inference — The agent sends the task + available tools to Ollama via the Dapr LLM component
+4. Tool Selection — The LLM analyzes the task and decides which tool(s) to call, using the docstrings
+5. Tool Execution — Dapr executes the tool as a workflow activity, ensuring durability
+6. Result Processing — Tool output is returned to the LLM for further reasoning or final response
+7. Workflow Completion — The workflow completes and the result is persisted
